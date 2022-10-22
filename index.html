@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="./css/litewebchat.css" />
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<link rel="stylesheet" type="text/css" href="./css/main.css" />
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+
+	</head>
+	<body>
+		<body>
+
+			<el-container id="app" class="paper">
+				<el-header>
+				<div class="app-title">{{botNick}}</div>
+				</el-header>
+				<el-main>
+					<el-row :span="22">
+						<div class="lite-chatbox">
+
+							<div v-for="message in messageList" class="cmsg" v-bind:class="message.direction">
+
+								<img class="headIcon radius" ondragstart="return false;" oncontextmenu="return false;" v-bind:src="['./img/avatar/'+message.avatar]" />
+								<span class="name">{{ message.nick }}</span>
+								<span class="content">{{ message.msg }}</span>
+								<span v-if="message.isShow" class="content">
+									<img src="./img/avatar/cat.jpeg" />
+									Name: Ocean <br>
+									Color: Black <br>
+									Breed: Domestic Shorthair / Mix <br>
+									Gender: Neutered Male <br>
+									Age: 8 month(s), 12 days <br>
+									Size: Medium <br>
+									Color: Black <br>
+									Spayed/Neutered: Yes <br>
+									Declawed: No <br>
+									Location: Cats - Down-Town <br>
+									Intake Date: 2022-10-10 <br>
+									Adoption Fee: $100.00 <br>
+							    </span>
+							</div>
+						</div>
+					</el-row>
+
+					<div class="inputBox">
+						<el-row :gutter="20">
+							<el-col :span="18">
+								<el-input v-model="inputBox" @keyup.enter.native="send" placeholder="Say whatever you want"></el-input>
+							</el-col>
+							 
+							<el-col :span="4">
+								<el-button @click="send" >Send</el-button>
+								<el-col>
+						</el-row>
+					</div>
+				</el-main>
+				
+			</el-container>
+		</body>
+		
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app',
+				data() {
+					return {
+						messageList: [],
+						inputBox: '',
+						botNick: 'Pet Bot',
+						thesaurus: '',
+						botAvatar: 'C.png',
+						myAvatar: 'B.jpg'
+					}
+			
+				},
+				methods: {
+					getThesaurus: function() {
+						axios.get('https://raw.githubusercontent.com/Kyomotoi/AnimeThesaurus/main/data.json')
+							.then((response) => this.thesaurus = response.data)
+					},
+					send: function() {
+						this.messageList.push({
+							nick: '',
+							msg: this.inputBox,
+							direction: 'cright',
+							avatar: this.myAvatar
+						});
+						var reply = '';
+
+						var flag = false
+
+						if (this.inputBox.indexOf("cute") != -1) {
+							reply = "Got it. What's the age of the cat?"
+						} else if (this.inputBox.indexOf("age") != -1) {
+							reply = "Got it. Where do you live?"
+						} else if(this.inputBox.indexOf("live in") != -1) {
+							flag = true
+							reply = "I got the cat that you may like!"
+						} else if(this.inputBox.indexOf("thank you") != -1) {
+							reply = "You are welcome."
+						} else {
+							reply = "Sorry, I don't understand."
+						}
+
+						var msg = {
+							nick: this.botNick,
+							msg: reply,
+							isShow: false,
+							direction: 'cleft',
+							avatar: this.botAvatar
+						}
+
+						if (flag) {
+							msg.isShow = true
+						}
+
+						this.messageList.push(msg);
+
+
+						setTimeout(() => {
+							var div = document.getElementsByClassName('el-main')[0];
+							div.scrollTop = div.scrollHeight;
+							this.inputBox = '';
+						}, 100)
+					}
+				},
+				created: function() {
+					this.getThesaurus();
+					this.messageList.push({
+						nick: this.botNick,
+						msg: 'Hi, I am Pet Bot. May I help you?',
+						direction: 'cleft',
+						avatar: this.botAvatar
+					});
+				}
+			});
+		</script>
+</html>
