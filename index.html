@@ -78,10 +78,6 @@
 			
 				},
 				methods: {
-					getThesaurus: function() {
-						axios.get('https://raw.githubusercontent.com/Kyomotoi/AnimeThesaurus/main/data.json')
-							.then((response) => this.thesaurus = response.data)
-					},
 					send: function() {
 						this.messageList.push({
 							nick: '',
@@ -129,7 +125,6 @@
 					}
 				},
 				created: function() {
-					this.getThesaurus();
 					this.messageList.push({
 						nick: this.botNick,
 						msg: 'Hi, I am Pet Bot. May I help you?',
