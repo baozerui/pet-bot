@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
+		<!-- <meta charset="utf-8" /> -->
+		<meta charset="UTF-8">
 		<title></title>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="./css/litewebchat.css" />
@@ -30,9 +31,9 @@
 								<span class="content">{{ message.msg }}</span>
 								<br>
 								<br>
-								<span v-if="message.isShow" class="content">
+								<span v-if="message.isShow1" class="content">
 									<img src="./img/avatar/cat.jpeg" />
-									Name: Ocean <br>
+									Name: Bucky Badger <br>
 									Color: Black <br>
 									Breed: Domestic Shorthair / Mix <br>
 									Gender: Neutered Male <br>
@@ -44,7 +45,24 @@
 									Location: Cats - Down-Town <br>
 									Intake Date: 2022-10-10 <br>
 									Adoption Fee: $100.00 <br>
+									<a href="https://www.adoptapet.com/pet/36219712-ann-arbor-michigan-cat">Meet Bucky Badger</a> <br>
 							    </span>
+								<span v-if="message.isShow2" class="content">
+									<img src="./img/avatar/cat2.jpeg" />
+									Name: Titus <br>
+									Color: Black <br>
+									Breed: Domestic Longhair <br>
+									Gender: Neutered Male <br>
+									Age: 9 month(s) <br>
+									Size: Medium <br>
+									Color: Black <br>
+									Spayed/Neutered: Yes <br>
+									Declawed: No <br>
+									Location: Cats - Down-Town <br>
+									Intake Date: 2022-10-10 <br>
+									Adoption Fee: $145.00 <br>
+									<a href="https://www.adoptapet.com/pet/35393632-ann-arbor-michigan-cat">Meet Titus</a> <br>
+								</span>
 							</div>
 						</div>
 					</el-row>
@@ -72,7 +90,7 @@
 					return {
 						messageList: [],
 						inputBox: '',
-						botNick: 'Pet Bot',
+						botNick: 'Pet Bot 🐾',
 						thesaurus: '',
 						botAvatar: 'C.png',
 						myAvatar: 'B.jpg'
@@ -89,31 +107,38 @@
 						});
 						var reply = '';
 
-						var flag = false
+						var flag = 0
 
 						if (this.inputBox.indexOf("black") != -1) {
 							reply = "Got it. What's the age of the cat?"
 						} else if (this.inputBox.indexOf("age") != -1) {
 							reply = "Got it. Where do you live?"
 						} else if(this.inputBox.indexOf("live in") != -1) {
-							flag = true
+							flag = 1
 							reply = "I got the cat that you may like!"
 						} else if(this.inputBox.indexOf("thank you") != -1) {
 							reply = "You are welcome."
-						} else {
+						} else if (this.inputBox.indexOf("next") != -1){
+							reply = "I got another cat that you may like!"
+							flag=2
+						}else {
 							reply = "Sorry, I don't understand."
 						}
 
 						var msg = {
 							nick: this.botNick,
 							msg: reply,
-							isShow: false,
+							isShow1: false,
+							isShow2: false,
 							direction: 'cleft',
 							avatar: this.botAvatar
 						}
 
-						if (flag) {
-							msg.isShow = true
+						if (flag==1) {
+							msg.isShow1 = true
+						}
+						if (flag==2) {
+							msg.isShow2 = true
 						}
 
 						this.messageList.push(msg);

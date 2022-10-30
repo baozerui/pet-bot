@@ -123,8 +123,7 @@
   -webkit-border-radius: 20px 0 20px 20px;
   border-radius: 20px 0 20px 20px;
   color: white;
-  background: -webkit-linear-gradient(70deg, #3FD1E1 0%, #44D7CD 100%);
-  background: linear-gradient(20deg, #3f8fe1cc 0%, #44d7c9 100%);
+  background: #147EFB;
   -webkit-box-shadow: 5px 5px 15px 0 rgba(102,102,102,0.15);
   box-shadow: 5px 5px 15px 0 rgba(102,102,102,0.15);
 }

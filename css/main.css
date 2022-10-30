@@ -18,15 +18,27 @@ main::-webkit-scrollbar {
 
 .app-title {
 	text-align: center;
-	color: transparent;
-	font-weight: bold;
-	background: linear-gradient(45deg, rgb(85, 122, 255) 100%, rgba(170, 85, 127, .4) 0%);
-	-webkit-background-clip: text;
+	font-size: 30px;
+	/* background: linear-gradient(45deg, rgb(85, 122, 255) 100%, rgba(170, 85, 127, .4) 0%);
+	-webkit-background-clip: text; */
+	width: 200% auto;
+	/* left: 30px; */
+	margin-top: -30px  ;
+	margin-left: -20px;
+	margin-right: -20px;
+	background: #efefef;
+	padding: 18px;
+	font-weight: 800;
+	color: rgb(65, 60, 60);
+	/* font-family: arial; */
+	font-family: Malgun Gothic;
+	position: relative;
+	/* border-radius: 25px; */
 }
 
-.lite-chatbox .cleft .content {
+/* .lite-chatbox .cleft .content {
 	background: rgba(255, 85, 127, 0.3) 50%;
-}
+} */
 
 .paper {
 	height: calc(95vh);
