@@ -15,7 +15,6 @@
 	</head>
 	<body>
 		<body>
-
 			<el-container id="app" class="paper">
 				<el-header>
 				<div class="app-title">{{botNick}}</div>
@@ -23,46 +22,43 @@
 				<el-main>
 					<el-row :span="22">
 						<div class="lite-chatbox">
-
 							<div v-for="message in messageList" class="cmsg" v-bind:class="message.direction">
-
 								<img class="headIcon radius" ondragstart="return false;" oncontextmenu="return false;" v-bind:src="['./img/avatar/'+message.avatar]" />
 								<span class="name">{{ message.nick }}</span>
-								<span class="content">{{ message.msg }}</span>
-								<br>
-								<br>
-								<span v-if="message.isShow1" class="content">
-									<img src="./img/avatar/cat.jpeg" />
-									Name: Bucky Badger <br>
-									Color: Black <br>
-									Breed: Domestic Shorthair / Mix <br>
-									Gender: Neutered Male <br>
-									Age: 8 month(s), 12 days <br>
-									Size: Medium <br>
-									Color: Black <br>
-									Spayed/Neutered: Yes <br>
-									Declawed: No <br>
-									Location: Cats - Down-Town <br>
-									Intake Date: 2022-10-10 <br>
-									Adoption Fee: $100.00 <br>
-							    </span>
-								<span v-if="message.isShow2" class="content">
-									<img src="./img/avatar/cat2.jpeg" />
-									Name: Titus <br>
-									Color: Black <br>
-									Breed: Domestic Longhair <br>
-									Gender: Neutered Male <br>
-									Age: 9 month(s) <br>
-									Size: Medium <br>
-									Color: Black <br>
-									Spayed/Neutered: Yes <br>
-									Declawed: No <br>
-									Location: Cats - Down-Town <br>
-									Intake Date: 2022-10-10 <br>
-									Adoption Fee: $145.00 <br>
-								</span>
-								<span v-if="message.isLink" class="content">
-									<a href="https://www.adoptapet.com/pet/35393632-ann-arbor-michigan-cat">Application Form</a> <br>
+								<span class="content">{{ message.msg }}
+									<div v-if="message.isShow1">
+										<img src="./img/avatar/cat.jpeg" />
+										Name: Bucky Badger <br>
+										Color: Black <br>
+										Breed: Domestic Shorthair / Mix <br>
+										Gender: Neutered Male <br>
+										Age: 8 month(s), 12 days <br>
+										Size: Medium <br>
+										Color: Black <br>
+										Spayed/Neutered: Yes <br>
+										Declawed: No <br>
+										Location: Cats - Down-Town <br>
+										Intake Date: 2022-10-10 <br>
+										Adoption Fee: $100.00 <br>
+									</div>
+									<div v-if="message.isShow2">
+										<img src="./img/avatar/cat2.jpeg" />
+										Name: Titus <br>
+										Color: Black <br>
+										Breed: Domestic Longhair <br>
+										Gender: Neutered Male <br>
+										Age: 9 month(s) <br>
+										Size: Medium <br>
+										Color: Black <br>
+										Spayed/Neutered: Yes <br>
+										Declawed: No <br>
+										Location: Cats - Down-Town <br>
+										Intake Date: 2022-10-10 <br>
+										Adoption Fee: $145.00 <br>
+									</div>
+									<div v-if="message.isLink">
+										<a href="https://www.adoptapet.com/pet/35393632-ann-arbor-michigan-cat">Application Form</a> <br>
+									</div>
 								</span>
 							</div>
 						</div>
@@ -101,7 +97,7 @@
 				methods: {
 					send: function() {
 						this.messageList.push({
-							nick: '',
+							nick: 'Me',
 							msg: this.inputBox,
 							direction: 'cright',
 							avatar: this.myAvatar
