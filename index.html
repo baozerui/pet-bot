@@ -45,7 +45,6 @@
 									Location: Cats - Down-Town <br>
 									Intake Date: 2022-10-10 <br>
 									Adoption Fee: $100.00 <br>
-									<a href="https://www.adoptapet.com/pet/36219712-ann-arbor-michigan-cat">Meet Bucky Badger</a> <br>
 							    </span>
 								<span v-if="message.isShow2" class="content">
 									<img src="./img/avatar/cat2.jpeg" />
@@ -61,7 +60,9 @@
 									Location: Cats - Down-Town <br>
 									Intake Date: 2022-10-10 <br>
 									Adoption Fee: $145.00 <br>
-									<a href="https://www.adoptapet.com/pet/35393632-ann-arbor-michigan-cat">Meet Titus</a> <br>
+								</span>
+								<span v-if="message.isLink" class="content">
+									<a href="https://www.adoptapet.com/pet/35393632-ann-arbor-michigan-cat">Application Form</a> <br>
 								</span>
 							</div>
 						</div>
@@ -108,19 +109,22 @@
 						var reply = '';
 
 						var flag = 0
-
+						var lflag = 0
 						if (this.inputBox.indexOf("black") != -1) {
 							reply = "Got it. What's the age of the cat?"
-						} else if (this.inputBox.indexOf("age") != -1) {
+						} else if (this.inputBox.indexOf("less") != -1) {
 							reply = "Got it. Where do you live?"
-						} else if(this.inputBox.indexOf("live in") != -1) {
+						} else if(this.inputBox.indexOf("Ann Arbor") != -1 || this.inputBox.indexOf("ann arbor") != -1) {
 							flag = 1
 							reply = "I got the cat that you may like!"
 						} else if(this.inputBox.indexOf("thank you") != -1) {
 							reply = "You are welcome."
-						} else if (this.inputBox.indexOf("next") != -1){
+						} else if (this.inputBox.indexOf("more") != -1 || this.inputBox.indexOf("other") != -1){
 							reply = "I got another cat that you may like!"
 							flag=2
+						} else if (this.inputBox.indexOf("like") != -1) {
+							reply = "Let's meet Titus now!"
+							lflag=1
 						}else {
 							reply = "Sorry, I don't understand."
 						}
@@ -130,6 +134,7 @@
 							msg: reply,
 							isShow1: false,
 							isShow2: false,
+							isLink: false,
 							direction: 'cleft',
 							avatar: this.botAvatar
 						}
@@ -139,6 +144,9 @@
 						}
 						if (flag==2) {
 							msg.isShow2 = true
+						}
+						if (lflag == 1) {
+							msg.isLink = true
 						}
 
 						this.messageList.push(msg);
